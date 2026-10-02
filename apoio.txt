@@ -1,0 +1,29 @@
+FICHA DE REFERÊNCIA — MATRIX
+
+INSPEÇÃO
+O navegador carrega HTML, folhas de estilo e scripts. O código-fonte mostra referências a esses arquivos. As abas Sources/Fontes e Network/Rede das ferramentas de desenvolvedor ajudam a identificar o que foi carregado.
+Atributos HTML registram informações além do texto exibido. O atributo id identifica um elemento; atributos data-* podem relacioná-lo a outro registro. Um elemento hidden continua no código, mas não aparece na página.
+
+BASE64
+Alfabeto: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+Valores: 0 a 63, na ordem. Cada símbolo representa seis bits. Una grupos de quatro símbolos e reorganize os bits em bytes de oito bits. O sinal = é preenchimento, não parte do texto decodificado.
+Exemplo sem relação com as flags: QUJD → ABC.
+ASCII: A=65, B=66, … Z=90; {=123; }=125.
+No Console do navegador, atob('QUJD') recupera ABC. Use somente a função de decodificação; não cole scripts recebidos de terceiros.
+Base64 é codificação e não exige uma chave secreta.
+
+CIFRA DE CÉSAR
+Alfabeto: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+A chave é a quantidade de posições do deslocamento. Para desfazer um avanço, recue a mesma quantidade. Após Z, volte a A; ao recuar antes de A, volte a Z.
+Exemplo sem relação com as flags: com chave 2, ECUC volta para CASA.
+Preserve maiúsculas e minúsculas. Espaços, números e pontuação permanecem iguais. Letras de extensões de arquivos também participam da cifra.
+Um identificador escrito como número por extenso pode representar a chave.
+
+LEITURA DE REGISTROS HTTP
+Um exportador pode reunir várias operações no mesmo arquivo. Cabeçalhos personalizados, como X-Correlation-ID, podem relacionar registros de uma operação; o nome do cabeçalho e sua função dependem da aplicação.
+206 Partial Content indica que a resposta contém uma parte da representação. Content-Range: bytes 0-3/8 informa os bytes 0 a 3, inclusive, de um total de 8. O byte inicial define a posição no conteúdo; a ordem das linhas do relatório pode ser diferente.
+404 Not Found indica recurso não encontrado. 416 Range Not Satisfiable indica um intervalo que não pode ser atendido; bytes */8 informa o tamanho total, sem um trecho válido.
+ETag identifica uma versão da representação. Trechos que pertencem à mesma reconstrução devem corresponder à mesma versão. Repetições idênticas de um intervalo não acrescentam novos bytes.
+O JSON é um formato estruturado. O campo response.headers conserva os cabeçalhos de cada resposta. X-Representation é um cabeçalho personalizado deste cenário e descreve a representação do conteúdo, não uma regra geral do HTTP.
+O exportador deste cenário registra o corpo no campo body_percent. Para recuperar os bytes do corpo, desfaça essa codificação antes de verificar os intervalos. Exemplo: decodeURIComponent('A%2BB%3D') → A+B=. Não substitua + por espaço.
+Depois de remontar uma representação completa em Base64, atob() pode recuperar seu texto. Exemplo genérico: atob('QUJD') → ABC.

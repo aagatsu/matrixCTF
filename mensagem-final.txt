@@ -1,0 +1,131 @@
+{
+  "format": "matrix-http-export/1",
+  "scenario": "simulated",
+  "export": {
+    "body_format": "percent-encoded",
+    "range_basis": "response representation bytes before export encoding"
+  },
+  "records": [
+    {
+      "event": "evt-103",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 206,
+        "headers": {
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes 12-23/28",
+          "ETag": "\"mx-v6-a1\"",
+          "X-Representation": "base64"
+        },
+        "body_percent": "U1RSRUFNRU5U"
+      }
+    },
+    {
+      "event": "evt-081",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 206,
+        "headers": {
+          "X-Correlation-ID": "mx-04-other",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes 0-11/28",
+          "ETag": "\"mx-v6-a1\"",
+          "X-Representation": "base64"
+        },
+        "body_percent": "QUJDREVGR0hJ"
+      }
+    },
+    {
+      "event": "evt-099",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8"
+        },
+        "body_percent": "Not%20Found"
+      }
+    },
+    {
+      "event": "evt-107",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 206,
+        "headers": {
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes 24-27/28",
+          "ETag": "\"mx-v6-a1\"",
+          "X-Representation": "base64"
+        },
+        "body_percent": "T30"
+      }
+    },
+    {
+      "event": "evt-101",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 206,
+        "headers": {
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes 0-11/28",
+          "ETag": "\"mx-v6-a1\"",
+          "X-Representation": "base64"
+        },
+        "body_percent": "TUFUUklYe1JB"
+      }
+    },
+    {
+      "event": "evt-102",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 416,
+        "headers": {
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes */28"
+        },
+        "body_percent": "Requested%20range%20is%20not%20satisfiable"
+      }
+    },
+    {
+      "event": "evt-104",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 206,
+        "headers": {
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes 12-23/28",
+          "ETag": "\"mx-v6-a1\"",
+          "X-Representation": "base64"
+        },
+        "body_percent": "U1RSRUFNRU5U"
+      }
+    }
+  ]
+}

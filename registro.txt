@@ -1,0 +1,5 @@
+[MX-04 / transmissão 02]
+2026-10-01 08:12:04 | canal=arquivo | estado=recuperado
+2026-10-01 08:12:05 | payload=TUFUUklYe0RBRE9TfQ==
+2026-10-01 08:12:06 | origem=carta.txt
+2026-10-01 08:12:07 | integridade=preservada
