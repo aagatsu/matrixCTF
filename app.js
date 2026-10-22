@@ -6,6 +6,9 @@ const flagHashes = [
 ];
 const recovered = new Set();
 const feedback = document.querySelector('#feedback');
+const captureNotice = document.querySelector('#capture-notice');
+const storageNote = document.querySelector('#storage-note');
+const storageKey = 'matrix-ctf:progress:' + new URL('.', window.location.href).pathname;
 let investigationVersion = 0;
 
 async function hashFlag(value) {
@@ -14,51 +17,118 @@ async function hashFlag(value) {
   return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
+function storageUnavailable() {
+  storageNote.textContent = 'O navegador não permitiu salvar o progresso. Anote suas flags antes de fechar ou atualizar a página.';
+  storageNote.classList.add('storage-warning');
+}
+
+function saveProgress() {
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify({
+      version: 1,
+      flags: Array.from(recovered, index => flagHashes[index])
+    }));
+    storageNote.textContent = 'Progresso salvo neste navegador. Use Reiniciar investigação antes de outra equipe começar.';
+    storageNote.classList.remove('storage-warning');
+  } catch {
+    storageUnavailable();
+  }
+}
+
+function restoreProgress() {
+  let raw;
+  try {
+    raw = window.localStorage.getItem(storageKey);
+  } catch {
+    storageUnavailable();
+    return;
+  }
+  if (!raw) return;
+  try {
+    const saved = JSON.parse(raw);
+    if (!saved || saved.version !== 1 || !Array.isArray(saved.flags)) return;
+    saved.flags.forEach(digest => {
+      const index = flagHashes.indexOf(digest);
+      if (index >= 0) recovered.add(index);
+    });
+  } catch {
+    // Um registro incompleto não impede uma nova investigação.
+  }
+}
+
 function render() {
   document.querySelector('#progress').textContent = `${recovered.size} / 4 flags recuperadas`;
-  document.querySelectorAll('#found li span').forEach((item, i) => {
-    item.textContent = recovered.has(i) ? 'Recuperado' : 'A recuperar';
+  document.querySelector('#progress-meter').setAttribute('aria-valuenow', recovered.size);
+  document.querySelector('#progress-fill').style.width = `${recovered.size * 25}%`;
+  document.querySelector('.submission').classList.toggle('is-complete', recovered.size === 4);
+  document.querySelectorAll('#found li').forEach((item, i) => {
+    item.classList.toggle('is-recovered', recovered.has(i));
+    item.querySelector('span').textContent = recovered.has(i) ? '✓ Recuperado' : 'A recuperar';
   });
+}
+
+function celebrate(index) {
+  const complete = recovered.size === 4;
+  captureNotice.classList.remove('is-celebrating');
+  captureNotice.classList.toggle('is-final', complete);
+  document.querySelector('#capture-title').textContent = complete
+    ? 'Investigação concluída!'
+    : `Flag ${String(index + 1).padStart(2, '0')} capturada!`;
+  document.querySelector('#capture-detail').textContent = complete
+    ? 'Quatro evidências recuperadas. Apresente seus registros ao mediador.'
+    : `Evidência validada. ${recovered.size} de 4 fragmentos recuperados. Continue a investigação.`;
+  captureNotice.hidden = false;
+  // Reinicia a animação a cada nova captura, sem temporizadores pendentes.
+  void captureNotice.offsetWidth;
+  captureNotice.classList.add('is-celebrating');
 }
 
 document.querySelector('#flag-form').addEventListener('submit', async event => {
   event.preventDefault();
-  const value = document.querySelector('#flag').value.trim().toUpperCase();
+  const input = document.querySelector('#flag');
+  const value = input.value.trim().toUpperCase();
   const version = investigationVersion;
+  captureNotice.hidden = true;
+  feedback.textContent = '';
   let digest;
   try {
     digest = await hashFlag(value);
   } catch {
     if (version !== investigationVersion) return;
+    feedback.dataset.tone = 'error';
     feedback.textContent = 'Não foi possível conferir a flag. Abra o site por HTTPS ou peça a conferência ao mediador.';
     return;
   }
   if (version !== investigationVersion) return;
   const index = flagHashes.indexOf(digest);
-
   if (index < 0) {
+    feedback.dataset.tone = 'error';
     feedback.textContent = 'Flag não reconhecida. Confira a mensagem e o formato.';
     return;
   }
-
   if (recovered.has(index)) {
-    feedback.textContent = 'Sua equipe já registrou esta flag.';
+    feedback.dataset.tone = 'info';
+    feedback.textContent = 'Sua equipe já registrou esta flag. Este fragmento já está marcado como recuperado.';
     return;
   }
-
   recovered.add(index);
+  saveProgress();
   render();
-  feedback.textContent = recovered.size === 4
-    ? 'Investigação concluída! Apresente as quatro flags e as evidências ao mediador.'
-    : 'Flag correta! Registre a evidência na folha da equipe e continue a investigação.';
-  document.querySelector('#flag').value = '';
+  celebrate(index);
+  // Não apaga uma nova entrada digitada enquanto a conferência ocorria.
+  if (input.value.trim().toUpperCase() === value) input.value = '';
 });
 
 document.querySelector('#reset').addEventListener('click', () => {
-  if (!window.confirm('Apagar o progresso desta investigação?')) return;
+  if (!window.confirm('Apagar as flags salvas neste navegador e iniciar uma nova investigação?')) return;
   investigationVersion++;
   recovered.clear();
+  saveProgress();
+  captureNotice.hidden = true;
   feedback.textContent = '';
   document.querySelector('#flag').value = '';
   render();
 });
+
+restoreProgress();
+render();

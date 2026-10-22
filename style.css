@@ -1,1 +1,31 @@
 :root{font-family:Arial,sans-serif;color:#edf4f1;background:#101916;line-height:1.6;font-size:16px}*{box-sizing:border-box}body{margin:0}header{padding:1.4rem 5%;border-bottom:1px solid #3c5148;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.875rem;letter-spacing:.08em}.brand{font-weight:800;color:#adf3bd}main{max-width:1160px;margin:auto;padding:2.5rem 2rem}.intro{max-width:760px}.eyebrow{color:#adf3bd;font-size:.875rem;letter-spacing:.12em}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;margin:.8rem 0 1rem;letter-spacing:-.035em}h2{font-size:1.25rem;margin-top:0}.intro>p{max-width:650px}.note{border-left:3px solid #a2d9ae;padding-left:1rem;color:#c8d9d0}.workspace{display:grid;align-items:start;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem}.evidence,.submission{border:1px solid #3c5148;padding:1.7rem;background:#16231e}.file{display:block;padding:1rem;background:#22352b;border:1px solid #4d6e59;text-decoration:none;color:#d9f6df;margin:1.5rem 0}.file small{display:block;color:#b9cdbf}details{border-top:1px solid #3c5148;padding:1rem 0}summary{cursor:pointer;font-weight:600}a{color:#b4f0c0}label{display:block;margin-bottom:.5rem}input,select{width:100%;background:#0d1712;border:1px solid #708779;color:white;padding:.85rem;font:inherit}button{font:inherit;font-weight:700;padding:.8rem 1.1rem;cursor:pointer;background:#b2efbe;color:#0f2717;border:1px solid #b2efbe;margin-top:.8rem;width:100%}button.secondary{background:transparent;color:#cfe4d5;border-color:#708779}.progress{font-family:monospace;font-size:1.125rem;color:#b2efbe}ol{padding:0;list-style:none;margin:1rem 0}li{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;border-bottom:1px solid #3c5148;padding:.8rem 0}li span{color:#a6bcae;font-size:.875rem}.small{font-size:.875rem;color:#b9cdbf}footer{padding:1.5rem 5%;border-top:1px solid #3c5148;font-size:.875rem;color:#b9cdbf}#feedback{min-height:1.6rem}:focus-visible{outline:3px solid #fff;outline-offset:4px}@media(max-width:760px){main{padding:1.5rem 1rem}.workspace{grid-template-columns:1fr;gap:1rem}.evidence,.submission{padding:1.2rem}}
+
+/* Progresso e confirmação de captura */
+[hidden]{display:none!important}
+.submission{transition:border-color .3s,box-shadow .3s}
+.submission.is-complete{border-color:#ddc278;box-shadow:0 0 0 1px #ddc27833,0 14px 40px #0003}
+.progress{margin-bottom:.65rem}
+.progress-meter{height:8px;background:#0d1712;border:1px solid #3c5148;border-radius:10px;margin-bottom:1.6rem;overflow:hidden}
+#progress-fill{display:block;height:100%;width:0;background:#adf3bd;transition:width .5s ease}
+.is-complete #progress-fill{background:#efda99}
+#feedback:empty{min-height:0;margin:0}
+#feedback[data-tone="error"]{color:#ffc3b7}
+#found{display:grid;gap:.6rem;margin:1.4rem 0}
+#found li{border:1px solid #3c5148;padding:.8rem .9rem;border-radius:6px;align-items:center;transition:background .3s,border-color .3s}
+#found li.is-recovered{background:#21392b;border-color:#76b986}
+#found li.is-recovered span{color:#c5f7ce;font-weight:700}
+.capture-notice{position:relative;display:flex;align-items:flex-start;gap:1rem;margin-top:1.3rem;padding:1.3rem 1.1rem;border:1px solid #9deab0;border-radius:9px;background:linear-gradient(130deg,#284d35,#182d22);box-shadow:0 6px 24px #0003;overflow:hidden}
+.capture-symbol{display:grid;place-items:center;flex:0 0 48px;height:48px;border:1px solid #98e8ab;background:#b2efbe;color:#12321e;border-radius:50%;box-shadow:0 0 0 6px #b2efbe12}
+.capture-label{font-size:.75rem;font-weight:700;letter-spacing:.13em;color:#c0efca;margin:0 0 .35rem}
+.capture-notice h3{font-size:1.35rem;line-height:1.25;margin:0 0 .55rem;letter-spacing:-.02em;color:#f2fff5;overflow-wrap:anywhere}
+#capture-detail{font-size:.9rem;margin:0;color:#d6eadb}
+.capture-notice.is-final{background:linear-gradient(130deg,#423b25,#242c20);border-color:#e8cf8b}
+.is-final .capture-symbol{color:#392e14;background:#efda99;border-color:#efda99;box-shadow:0 0 0 6px #efda9914}
+.is-final .capture-label{color:#efda99}
+.is-celebrating{animation:capture-appear .45s ease-out both}
+.is-celebrating .capture-symbol{animation:capture-seal .65s ease-out both}
+.storage-warning{color:#f1c695}
+@keyframes capture-appear{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes capture-seal{0%{transform:scale(.7) rotate(-12deg)}65%{transform:scale(1.12) rotate(0)}100%{transform:scale(1)}}
+@media(max-width:420px){.capture-notice{gap:.8rem;padding:1rem}.capture-symbol{flex-basis:38px;height:38px}.capture-notice h3{font-size:1.2rem}#found li{font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){.is-celebrating,.is-celebrating .capture-symbol{animation:none}#progress-fill,.submission,#found li{transition:none}}
