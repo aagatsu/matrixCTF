@@ -4,7 +4,7 @@ const archiveManifest = Object.freeze({
   revision: '2026.10',
   transport: 'static',
   source: 'registro.txt',
-  legacyTag: 'MATRIX{ROKDU}',
+  legacyTag: 'MATRIX{OLHAR}',
   restored: true
 });
 

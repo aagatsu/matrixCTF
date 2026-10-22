@@ -10,32 +10,30 @@
       "event": "evt-103",
       "request": {
         "method": "GET",
-      },
-
-
-      "response": {
-        "status": 444,
-        "headers": {
-          "X-Correlation-ID": "mtx-04-0002",
-          "Content-Type": "text/plain; charset=utf-8",
-          "Content-Range": "bytes 12-23/28",
-          "ETag": "\"CTF\"",
-          "X-Representation": "base64"
-        },
-        "key": "U1RSRUFNRU5U"
-      }
-    },
-
-
-    {
-      "event": "evt-081",
-      "request": {
-        "method": "GET",
+        "path": "/exports/evidence.txt"
       },
       "response": {
         "status": 206,
         "headers": {
-          "X-Correlation-ID": "kz-09",
+          "X-Correlation-ID": "mx-04-7c31",
+          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Range": "bytes 12-23/28",
+          "ETag": "\"mx-v6-a1\"",
+          "X-Representation": "base64"
+        },
+        "body_percent": "U1RSRUFNRU5U"
+      }
+    },
+    {
+      "event": "evt-081",
+      "request": {
+        "method": "GET",
+        "path": "/exports/evidence.txt"
+      },
+      "response": {
+        "status": 206,
+        "headers": {
+          "X-Correlation-ID": "mx-04-other",
           "Content-Type": "text/plain; charset=utf-8",
           "Content-Range": "bytes 0-11/28",
           "ETag": "\"mx-v6-a1\"",
@@ -44,69 +42,67 @@
         "body_percent": "QUJDREVGR0hJ"
       }
     },
-
     {
       "event": "evt-099",
       "request": {
         "method": "GET",
+        "path": "/exports/evidence.txt"
       },
       "response": {
         "status": 404,
         "headers": {
-          "X-Correlation-ID": "sa-75",
+          "X-Correlation-ID": "mx-04-7c31",
           "Content-Type": "text/plain; charset=utf-8"
         },
         "body_percent": "Not%20Found"
       }
     },
-
     {
       "event": "evt-107",
       "request": {
         "method": "GET",
+        "path": "/exports/evidence.txt"
       },
       "response": {
-        "status": 444,
+        "status": 206,
         "headers": {
-          "X-Correlation-ID": "mtx-04-0003",
+          "X-Correlation-ID": "mx-04-7c31",
           "Content-Type": "text/plain; charset=utf-8",
           "Content-Range": "bytes 24-27/28",
-          "ETag": "\"CTF\"",
+          "ETag": "\"mx-v6-a1\"",
           "X-Representation": "base64"
         },
-        "key": "T30"
+        "body_percent": "T30%3D"
       }
     },
-
-
     {
       "event": "evt-101",
       "request": {
         "method": "GET",
+        "path": "/exports/evidence.txt"
       },
       "response": {
-        "status": 444,
+        "status": 206,
         "headers": {
-          "X-Correlation-ID": "mtx-04-0001",
+          "X-Correlation-ID": "mx-04-7c31",
           "Content-Type": "text/plain; charset=utf-8",
           "Content-Range": "bytes 0-11/28",
-          "ETag": "\"CTF\"",
+          "ETag": "\"mx-v6-a1\"",
           "X-Representation": "base64"
         },
-        "key": "TUFUUklYe1JB" 
+        "body_percent": "TUFUUklYe1JB"
       }
     },
-
-
     {
       "event": "evt-102",
       "request": {
         "method": "GET",
+        "path": "/exports/evidence.txt"
       },
       "response": {
         "status": 416,
         "headers": {
-          "X-Correlation-ID": "ab-21",
+          "X-Correlation-ID": "mx-04-7c31",
           "Content-Type": "text/plain; charset=utf-8",
           "Content-Range": "bytes */28"
         },
@@ -117,11 +113,12 @@
       "event": "evt-104",
       "request": {
         "method": "GET",
+        "path": "/exports/evidence.txt"
       },
       "response": {
         "status": 206,
         "headers": {
-          "X-Correlation-ID": "xh-52",
+          "X-Correlation-ID": "mx-04-7c31",
           "Content-Type": "text/plain; charset=utf-8",
           "Content-Range": "bytes 12-23/28",
           "ETag": "\"mx-v6-a1\"",
